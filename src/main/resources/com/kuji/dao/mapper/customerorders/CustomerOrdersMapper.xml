@@ -5,10 +5,10 @@
 	<select id="getCustomerOrderId" resultType="int">
 		SELECT  IFNULL(MIN(ID + 1), 1) AS ID
         FROM (
-			SELECT ID FROM kuji_prod.kuji_prod.CUSTOMER_ORDER
+			SELECT ID FROM kuji_prod.CUSTOMER_ORDER
 			UNION
 			SELECT 0 WHERE (SELECT COUNT(ID) FROM kuji_prod.CUSTOMER_ORDER WHERE ID = 1) = 0
-		) AS kuji_prod.CUSTOMER_ORDER
+		) AS CUSTOMER_ORDER
         WHERE   (ID + 1) NOT IN (SELECT ID FROM kuji_prod.CUSTOMER_ORDER)
 	</select>
 
