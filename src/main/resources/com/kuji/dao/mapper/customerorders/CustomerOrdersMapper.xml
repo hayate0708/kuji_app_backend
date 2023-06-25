@@ -5,25 +5,25 @@
 	<select id="getCustomerOrderId" resultType="int">
 		SELECT  IFNULL(MIN(ID + 1), 1) AS ID
         FROM (
-			SELECT ID FROM CUSTOMER_ORDER
+			SELECT ID FROM kuji_prod.kuji_prod.CUSTOMER_ORDER
 			UNION
-			SELECT 0 WHERE (SELECT COUNT(ID) FROM CUSTOMER_ORDER WHERE ID = 1) = 0
-		) AS CUSTOMER_ORDER
-        WHERE   (ID + 1) NOT IN (SELECT ID FROM CUSTOMER_ORDER)
+			SELECT 0 WHERE (SELECT COUNT(ID) FROM kuji_prod.CUSTOMER_ORDER WHERE ID = 1) = 0
+		) AS kuji_prod.CUSTOMER_ORDER
+        WHERE   (ID + 1) NOT IN (SELECT ID FROM kuji_prod.CUSTOMER_ORDER)
 	</select>
 
 	<select id="getCustomerOrders" resultType="com.kuji.entity.CustomerOrder">
 		SELECT  *
-		FROM    CUSTOMER_ORDER
+		FROM    kuji_prod.CUSTOMER_ORDER
 	</select>
 
 	<insert id="addCustomerOrder">
-		INSERT  INTO CUSTOMER_ORDER
+		INSERT  INTO kuji_prod.CUSTOMER_ORDER
 		VALUES  (#{id}, #{division}, #{seat_group}, #{name}, #{drink})
 	</insert>
 
 	<update id="updateCustomerOrder">
-		UPDATE CUSTOMER_ORDER SET
+		UPDATE kuji_prod.CUSTOMER_ORDER SET
 			DIVISION   = #{division},
 			SEAT_GROUP = #{seat_group},
 			NAME       = #{name},
@@ -32,7 +32,7 @@
 	</update>
 
 	<delete id="deleteCustomerOrder">
-		DELETE  FROM CUSTOMER_ORDER
+		DELETE  FROM kuji_prod.CUSTOMER_ORDER
 		WHERE   ID = #{id}
 	</delete>
 	
